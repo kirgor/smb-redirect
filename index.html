@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SMB redirect</title>
+    <style>
+        body {
+          width: 80%;
+          margin: 0 auto;
+          background: white;
+        }
+
+        #in {
+          margin-top: 20px;
+          height: 20px;
+          width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<h1>SMB redirect</h1>
+<form onsubmit="onSubmit(event)">
+  <input id="in" type="text"/>
+</form>
+
+<script>
+  function onSubmit(e) {
+    e.preventDefault();
+
+    const inputPath = document.getElementById('in').value;
+    const outputPath = convert(inputPath);
+    if (outputPath.startsWith('smb://')) {
+      document.location.href = outputPath;
+    }
+  }
+
+  function convert(text) {
+    return text.replace('\\\\', 'smb://').replace(/\\/g, '/')
+  }
+</script>
+</body>
+</html>
