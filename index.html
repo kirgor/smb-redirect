@@ -21,18 +21,25 @@
 
 <h1>SMB redirect</h1>
 <form onsubmit="onSubmit(event)">
-  <input id="in" type="text"/>
+  <input id="in" type="text" onfocus="onFocus()"/>
 </form>
 
 <script>
+  const input = document.getElementById('in');
+  input.focus();
+
   function onSubmit(e) {
     e.preventDefault();
 
-    const inputPath = document.getElementById('in').value;
+    const inputPath = input.value;
     const outputPath = convert(inputPath);
     if (outputPath.startsWith('smb://')) {
       document.location.href = outputPath;
     }
+  }
+
+  function onFocus() {
+    input.select()
   }
 
   function convert(text) {
